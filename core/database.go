@@ -5,19 +5,20 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 func GetDatabaseConnection(name string) (*gorm.DB, error) {
-	name = fmt.Sprintf("db_%s", name)
+	name = strings.ToUpper(fmt.Sprintf("db_%s", name))
 
 	// mengambil konfigurasi database dari .env
-	username := os.Getenv(fmt.Sprintf("%s_username", name))
-	password := os.Getenv(fmt.Sprintf("%s_password", name))
-	host := os.Getenv(fmt.Sprintf("%s_host", name))
-	dbname := os.Getenv(fmt.Sprintf("%s_name", name))
+	username := os.Getenv(fmt.Sprintf("%s_USERNAME", name))
+	password := os.Getenv(fmt.Sprintf("%s_PASSWORD", name))
+	host := os.Getenv(fmt.Sprintf("%s_HOST", name))
+	dbname := os.Getenv(fmt.Sprintf("%s_NAME", name))
 
 	// memastikan apabila konfigurasi tersedia
 	if username == "" {
