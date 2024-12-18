@@ -7,6 +7,7 @@ import (
 	"gudang-api-go-v1/models"
 	"gudang-api-go-v1/rest/routes"
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -51,8 +52,8 @@ func main() {
 	protected.Use(middlewares.RequireToken())
 	routes.Auth(protected, dbs)
 
-	server := "localhost"
-	host := "8021"
+	server := os.Getenv("HOST")
+	host := os.Getenv("PORT")
 
 	// menjalankan server gin sesuai env
 	router.Use(gin.Logger())
